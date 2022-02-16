@@ -23,6 +23,7 @@ class GCNModel(nn.Module):
         adj = torch.zeros((x.size(0),x.size(0)), device=x.device)
         for ind in edges[:,:2]: 
             adj[ind[0],ind[1]]=1
+            adj[ind[1],ind[0]]=1
         deg = adj.sum(axis=1, keepdim=True) # Degree of nodes, shape [N, 1]
 
         ### BEGIN SOLUTION
