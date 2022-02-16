@@ -56,7 +56,7 @@ class GHN(nn.Module):
 
         self.max_shape = max_shape # [64,64,3,3]
 
-        self.conv_enc = ConvEncoder(self.max_shape,out_features=hid)
+        self.conv_enc = MLPEncoder(self.max_shape,out_features=hid)
         self.linear_enc = MLPEncoder(max_shape[:2],out_features=hid)
         self.bias_enc = nn.Linear(max_shape[0],hid)
 
@@ -97,6 +97,6 @@ class GHN(nn.Module):
 
         out = self.predictor(torch.max(torch.cat([x,x_bar],dim=1),dim=0).values)
 
-        return out
+        return torch.nn.functional.softplus(out)
 
 
