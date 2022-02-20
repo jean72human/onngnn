@@ -27,7 +27,7 @@ class GCNModel(nn.Module):
         deg = adj.sum(axis=1, keepdim=True) # Degree of nodes, shape [N, 1]
 
         ### BEGIN SOLUTION
-        x = self.ReLU(self.hidden(1/deg * adj @ x))
+        x = self.hidden(1/deg * adj @ x) #self.ReLU(self.hidden(1/deg * adj @ x))
         x = self.out(1/deg * adj @ x)
         ### END SOLUTION
         return x
